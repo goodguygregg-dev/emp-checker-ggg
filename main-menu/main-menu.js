@@ -126,6 +126,8 @@ function registerButtonsCallbacks() {
         insertSettingsModalHtml();
         jQuery(".quote-comment-modal").show();
         jQuery(".main-menu-form-popup").hide();
+        jQuery("#main-menu-button").html("Open Menu"); // by koukol
+        GM_setValue("isMainMenuOpen", true); // by koukol
     });
 
     /* hides/show menu <- shamelessly copied from the code below. I'm positive there are better ways of doing this,
