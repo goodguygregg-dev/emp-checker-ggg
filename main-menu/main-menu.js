@@ -6,27 +6,58 @@ function addMainMenuToDom() {
 
     let mainMenuHtml = GM_getResourceText("mainMenuHtml");
     let mainMenuElement = document.createElement("div");
+    mainMenuElement.setAttribute("id", "checker-script"); // sets an ID to the checker div for future styling purposes (by koukol)
     mainMenuElement.innerHTML = mainMenuHtml;
     document.body.appendChild(mainMenuElement);
-   
-    setHideAvatarLables();
-    setHideSignatureLables();
+
+    GM_setValue("isMainMenuOpen", true); // hacky way of setting the default value of the menu status, probably dont need a GM_value to do this at all (by koukol)
+
+    setHideAvatarLabels();
+    setHideBadgesLabels();
+    setHideSignatureLabels();
 
     registerButtonsCallbacks();
 }
 
-function setHideAvatarLables() {
+// atempt to make the main-menu-button show/hide the menu and change button label on click (by koukol)
+
+function setMainMenuOpen() {
+    let isMainMenuOpen = GM_getValue("isMainMenuOpen");
+    if (isMainMenuOpen) {
+        jQuery("#main-menu-button").html("Open Menu");
+        jQuery(".main-menu-form-popup").hide();
+    } else {
+        jQuery("#main-menu-button").html("Close Menu");
+        jQuery(".main-menu-form-popup").show();
+    };
+};
+
+
+function setHideAvatarLabels() {
     let isHidingAvatars = GM_getValue("isHidingAvatars");
     if (isHidingAvatars) {
-        jQuery(".main-menu-form-popup #hide-avatar-button").html("Show Avatrs");
+        jQuery(".main-menu-form-popup #hide-avatar-button").html("Show Avatars"); // typo fixed (by koukol)
         jQuery(".avatar").hide();
     } else {
-        jQuery(".main-menu-form-popup #hide-avatar-button").html("Hide Avatrs");
+        jQuery(".main-menu-form-popup #hide-avatar-button").html("Hide Avatars"); // typo fixed (by koukol)
         jQuery(".avatar").show();
     }
 }
 
-function setHideSignatureLables() {
+// Added 'hide Badges' functionality (by koukol)
+
+function setHideBadgesLabels() {
+    let isHidingBadges = GM_getValue("isHidingBadges");
+    if (isHidingBadges) {
+        jQuery(".main-menu-form-popup #hide-badges-button").html("Show Badges");
+        jQuery(".badges").hide();
+    } else {
+        jQuery(".main-menu-form-popup #hide-badges-button").html("Hide Badges");
+        jQuery(".badges").show();
+    }
+}
+
+function setHideSignatureLabels() {
     let isHidingSignature = GM_getValue("isHidingSignature");
     if (isHidingSignature) {
         jQuery(".main-menu-form-popup #hide-signatures-button").html("Show Signatures");
@@ -41,7 +72,7 @@ function registerButtonsCallbacks() {
     console.log("Registering main menu buttons callbacks...");
 
 
-    
+
     // shows the main menu
     if((document.URL.indexOf(collage_checker_string) >= 0) || (document.URL.indexOf(forum_checker_string) >= 0) || (document.URL.indexOf(torrent_checker_string) >= 0)){
         jQuery("body").on("click", "#main-menu-button", function () {
@@ -77,22 +108,37 @@ function registerButtonsCallbacks() {
         });
     }
 
-    // hides the main menue and clears saved data...
+    // hides the main menu and clears saved data...
     jQuery("body").on("click", ".main-menu-form-popup #clear-data-button", function () {
         clearSavedValues();
         jQuery(".main-menu-form-popup").hide();
+        jQuery("#main-menu-button").html("Open Menu");  // by koukol
+        GM_setValue("isMainMenuOpen", true);  // by koukol
     });
 
-    // hides the main menue
+    /* hides the main menu (deprecated, we don't need this anymore. By koukol)
     jQuery("body").on("click", ".main-menu-form-popup #cancel-button", function () {
         jQuery(".main-menu-form-popup").hide();
-    });
+    }); */
 
     // shows settings modal
     jQuery("body").on("click", ".main-menu-form-popup #settings-button", function () {
         insertSettingsModalHtml();
         jQuery(".quote-comment-modal").show();
         jQuery(".main-menu-form-popup").hide();
+    });
+
+    /* hides/show menu <- shamelessly copied from the code below. I'm positive there are better ways of doing this,
+    but I haven't learned them yet, and this one works too (by koukol) */
+    jQuery("body").on("click", "#main-menu-button", function () {
+        let isMainMenuOpen = GM_getValue("isMainMenuOpen");
+        if (isMainMenuOpen) {
+            isMainMenuOpen = !isMainMenuOpen;
+        } else {
+            isMainMenuOpen = !isMainMenuOpen;
+        }
+        GM_setValue("isMainMenuOpen", isMainMenuOpen);
+        setMainMenuOpen(isMainMenuOpen);
     });
 
     // hides/show avatars
@@ -104,7 +150,19 @@ function registerButtonsCallbacks() {
             isHidingAvatars = !isHidingAvatars;
         }
         GM_setValue("isHidingAvatars", isHidingAvatars);
-        setHideAvatarLables(isHidingAvatars);
+        setHideAvatarLabels(isHidingAvatars);
+    });
+
+    // hides/show badges
+    jQuery("body").on("click", ".main-menu-form-popup #hide-badges-button", function () {
+        let isHidingBadges = GM_getValue("isHidingBadges");
+        if (isHidingBadges) {
+            isHidingBadges = !isHidingBadges;
+        } else {
+            isHidingBadges = !isHidingBadges;
+        }
+        GM_setValue("isHidingBadges", isHidingBadges);
+        setHideBadgesLabels(isHidingBadges);
     });
 
     // hides/show signatues
@@ -116,7 +174,7 @@ function registerButtonsCallbacks() {
             isHidingSignature = !isHidingSignature;
         }
         GM_setValue("isHidingSignature", isHidingSignature);
-        setHideSignatureLables(isHidingSignature);
+        setHideSignatureLabels(isHidingSignature);
     });
 
     // starts comment scan
@@ -126,9 +184,11 @@ function registerButtonsCallbacks() {
         if (mostRecentComment == "" || oldestComment == "") {
             alert("Both fields for comment numbers must be filled");
         } else if (mostRecentComment <= oldestComment) {
-            alert("Olderst comment must be a smaller number than the newest comment");
+            alert("Oldest comment must be a smaller number than the newest comment");
         } else {
             jQuery(".main-menu-form-popup").hide();
+            jQuery("#main-menu-button").html("Open Menu"); // by koukol
+            GM_setValue("isMainMenuOpen", true); // by koukol
             GM_setValue("mostRecentComment", mostRecentComment);
             GM_setValue("oldestComment", oldestComment);
             GM_setValue("isScaning", true);
