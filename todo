@@ -11,3 +11,4 @@
 * add cancel checking button and update the report header to reflect this
 * button to scroll back to progressbar
 * hide badges setting
+* don't upscale external images if they are too small (i think we downscale to 500px width?)
