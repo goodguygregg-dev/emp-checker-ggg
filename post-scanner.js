@@ -181,5 +181,5 @@ function iterateThroughPosts(mostRecentComment, oldestComment, storedPostsHtml) 
     storedPostsHtml = postArray.join("\n");       
     //console.log(postId);
     console.log("is finished: " + finished);
-    return { isFinished: finished, storedHtml: storedPostsHtml };
+    return { isFinished: finished, storedHtml: storedPostsHtml };    
 }
