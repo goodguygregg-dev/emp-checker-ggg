@@ -15,7 +15,7 @@
 ** CSS style for Afterdark
 ** Resize gifs too
 ** Add a warning before leaving the page so progress won't be lost
-** scroll to progress bar when done scanning
+
 
 
 // done
@@ -28,3 +28,4 @@
 ** Change the "Open Form" button label accordingly.
 ** Because of above, remove the "Cancel" button.
 ** Add "Hide Badges" functionality.
+** scroll to progress bar when done scanning

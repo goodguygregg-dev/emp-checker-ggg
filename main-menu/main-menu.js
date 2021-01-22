@@ -6,11 +6,11 @@ function addMainMenuToDom() {
 
     let mainMenuHtml = GM_getResourceText("mainMenuHtml");
     let mainMenuElement = document.createElement("div");
-    mainMenuElement.setAttribute("id", "checker-script"); // sets an ID to the checker div for future styling purposes (by koukol)
+    mainMenuElement.setAttribute("id", "checker-script"); // sets an ID to the checker div for future styling purposes
     mainMenuElement.innerHTML = mainMenuHtml;
     document.body.appendChild(mainMenuElement);
 
-    GM_setValue("isMainMenuOpen", true); // hacky way of setting the default value of the menu status, probably dont need a GM_value to do this at all (by koukol)
+    GM_setValue("isMainMenuOpen", true); // hacky way of setting the default value of the menu status, probably dont need a GM_value to do this at all
 
     setHideAvatarLabels();
     setHideBadgesLabels();
@@ -19,7 +19,7 @@ function addMainMenuToDom() {
     registerButtonsCallbacks();
 }
 
-// atempt to make the main-menu-button show/hide the menu and change button label on click (by koukol)
+// atempt to make the main-menu-button show/hide the menu and change button label on click
 
 function setMainMenuOpen() {
     let isMainMenuOpen = GM_getValue("isMainMenuOpen");
@@ -36,15 +36,15 @@ function setMainMenuOpen() {
 function setHideAvatarLabels() {
     let isHidingAvatars = GM_getValue("isHidingAvatars");
     if (isHidingAvatars) {
-        jQuery(".main-menu-form-popup #hide-avatar-button").html("Show Avatars"); // typo fixed (by koukol)
+        jQuery(".main-menu-form-popup #hide-avatar-button").html("Show Avatars");
         jQuery(".avatar").hide();
     } else {
-        jQuery(".main-menu-form-popup #hide-avatar-button").html("Hide Avatars"); // typo fixed (by koukol)
+        jQuery(".main-menu-form-popup #hide-avatar-button").html("Hide Avatars");
         jQuery(".avatar").show();
     }
 }
 
-// Added 'hide Badges' functionality (by koukol)
+// added 'hide Badges' functionality
 
 function setHideBadgesLabels() {
     let isHidingBadges = GM_getValue("isHidingBadges");
@@ -112,11 +112,11 @@ function registerButtonsCallbacks() {
     jQuery("body").on("click", ".main-menu-form-popup #clear-data-button", function () {
         clearSavedValues();
         jQuery(".main-menu-form-popup").hide();
-        jQuery("#main-menu-button").html("Open Menu");  // by koukol
-        GM_setValue("isMainMenuOpen", true);  // by koukol
+        jQuery("#main-menu-button").html("Open Menu");
+        GM_setValue("isMainMenuOpen", true);
     });
 
-    /* hides the main menu (deprecated, we don't need this anymore. By koukol)
+    /* hides the main menu (deprecated, we don't need this anymore)
     jQuery("body").on("click", ".main-menu-form-popup #cancel-button", function () {
         jQuery(".main-menu-form-popup").hide();
     }); */
@@ -126,12 +126,12 @@ function registerButtonsCallbacks() {
         insertSettingsModalHtml();
         jQuery(".quote-comment-modal").show();
         jQuery(".main-menu-form-popup").hide();
-        jQuery("#main-menu-button").html("Open Menu"); // by koukol
-        GM_setValue("isMainMenuOpen", true); // by koukol
+        jQuery("#main-menu-button").html("Open Menu");
+        GM_setValue("isMainMenuOpen", true);
     });
 
     /* hides/show menu <- shamelessly copied from the code below. I'm positive there are better ways of doing this,
-    but I haven't learned them yet, and this one works too (by koukol) */
+    but I haven't learned them yet, and this one works too */
     jQuery("body").on("click", "#main-menu-button", function () {
         let isMainMenuOpen = GM_getValue("isMainMenuOpen");
         if (isMainMenuOpen) {
@@ -189,8 +189,8 @@ function registerButtonsCallbacks() {
             alert("Oldest comment must be a smaller number than the newest comment");
         } else {
             jQuery(".main-menu-form-popup").hide();
-            jQuery("#main-menu-button").html("Open Menu"); // by koukol
-            GM_setValue("isMainMenuOpen", true); // by koukol
+            jQuery("#main-menu-button").html("Open Menu");
+            GM_setValue("isMainMenuOpen", true);
             GM_setValue("mostRecentComment", mostRecentComment);
             GM_setValue("oldestComment", oldestComment);
             GM_setValue("isScaning", true);

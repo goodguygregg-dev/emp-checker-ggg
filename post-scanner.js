@@ -16,6 +16,7 @@ function clearSavedValues() {
     GM_deleteValue("oldestComment");
     GM_deleteValue("storedPostsHtml");
     GM_deleteValue("isScaning");
+    GM_deleteValue("previousPostId");
 }
 
 function scanPosts() {
@@ -23,10 +24,11 @@ function scanPosts() {
     let mostRecentComment = GM_getValue("mostRecentComment");
     let oldestComment = GM_getValue("oldestComment");
     let storedPostsHtml = GM_getValue("storedPostsHtml");
+    GM_setValue("previousPostId", mostRecentComment);
 
     if (mostRecentComment === undefined || oldestComment === undefined) {
         console.log(
-            "Both mostRecentComment and oldestComment should have been stored at this point... Something is wrong...Exiting fuction"
+            "Both mostRecentComment and oldestComment should have been stored at this point... Something is wrong...Exiting function"
         );
         return;
     }
@@ -47,13 +49,15 @@ function scanPosts() {
         jQuery(".linkbox").remove();
         insertProgressBarHtml();
         jQuery(".thin").append(ans.storedHtml);
-        
+        jQuery("a[href='#']").attr('href', '#progress-bar')
+
         // insertModalHtml();
         GM_setValue("isScaning", false);
         addButtonsToPosts();
         addSandbox();
         updateProgressBarValue();
-        window.scrollTo(0, 0);
+        //window.scrollTo(0, 0);  (deprecated by next line)
+        document.getElementById('progress-bar').scrollIntoView();
         clearSavedValues();
         jQuery("#content .thin h2").html(generateCheckingPageHeader(mostRecentComment, oldestComment));
         jQuery("#quickpost").val(generateReportHeader(mostRecentComment, oldestComment));
@@ -77,7 +81,7 @@ function scanPosts() {
                 console.error("Could not find next page! Re-setting!");
                 clearSavedValues();
             }
-        }, 1000);
+        }, 5000);
     }
 }
 
@@ -130,6 +134,7 @@ function generateReportHeader(mostRecentComment, oldestComment) {
 function iterateThroughPosts(mostRecentComment, oldestComment, storedPostsHtml) {
     let finished = false;
     let postId = -1;
+    let previousPostId = GM_getValue("previousPostId");
     let postArray = [];
     let tempPostHtml = "";
     postArray.push(storedPostsHtml);
@@ -146,14 +151,22 @@ function iterateThroughPosts(mostRecentComment, oldestComment, storedPostsHtml) 
                 } else if (postId > mostRecentComment) {
                     return true;
                 } else {
-                    // storedPostsHtml = storedPostsHtml + "\n" + jQuery(this).prev()[0].outerHTML + "\n" + jQuery(this)[0].outerHTML;
-                    // re-populates posts after scanning, if there is a header then include those
-                    if (jQuery("#post" + postId).prev().is("div.head")){
-                        tempPostHtml = "\n" + jQuery(this).prev()[0].outerHTML + "\n" + jQuery(this)[0].outerHTML;
-                        postArray.push(tempPostHtml);
+                    if (postId < previousPostId || postId == mostRecentComment) {
+                        // storedPostsHtml = storedPostsHtml + "\n" + jQuery(this).prev()[0].outerHTML + "\n" + jQuery(this)[0].outerHTML;
+                        // re-populates posts after scanning, if there is a header then include those
+                        if (jQuery("#post" + postId).prev().is("div.head")){
+                            tempPostHtml = "\n" + jQuery(this).prev()[0].outerHTML + "\n" + jQuery(this)[0].outerHTML;
+                            postArray.push(tempPostHtml);
+                            previousPostId = postId;
+                            GM_setValue("previousPostId", postId);
+                        } else {
+                            tempPostHtml = "\n" + jQuery(this)[0].outerHTML;
+                            postArray.push(tempPostHtml);
+                            previousPostId = postId;
+                            GM_setValue("previousPostId", postId);
+                        }
                     } else {
-                        tempPostHtml = "\n" + jQuery(this)[0].outerHTML;
-                        postArray.push(tempPostHtml);
+                        console.log("Post with ID " + postId + " was ignored because it's a dupe.");
                     }
                 }
             });
@@ -176,10 +189,11 @@ function iterateThroughPosts(mostRecentComment, oldestComment, storedPostsHtml) 
                        postArray.push(tempPostHtml);
                 }
             });
-}
+    }
     postArray.reverse();
-    storedPostsHtml = postArray.join("\n");       
+    storedPostsHtml = postArray.join("\n");
+
     //console.log(postId);
     console.log("is finished: " + finished);
-    return { isFinished: finished, storedHtml: storedPostsHtml };    
+    return { isFinished: finished, storedHtml: storedPostsHtml };
 }
