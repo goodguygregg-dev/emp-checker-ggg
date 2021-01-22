@@ -9,6 +9,7 @@
 * add cancel checking button and update the report header to reflect this
 * fix duplicate posts on scan results
 * don't upscale external images if they are too small (i think we downscale to 500px width?)
+* pause YT videos when hiding posts
 
 ** Center the "Open Form" button between "Content" div and right edge.
 ** Align "Newest" and "Oldest" labels to center.
