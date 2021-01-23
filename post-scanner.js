@@ -79,7 +79,7 @@ function scanPosts() {
                 console.error("Could not find next page! Re-setting!");
                 clearSavedValues();
             }
-        }, 5000);
+        }, 1000);
     }
 }
 

@@ -7,9 +7,9 @@
 * preview button in the settings modal throws and error and gets stuck on "updating" forever
 * inserting bbcode into header/footer etc in the settings does not work 
 * add cancel checking button and update the report header to reflect this
-* fix duplicate posts on scan results
 * don't upscale external images if they are too small (i think we downscale to 500px width?)
 * pause YT videos when hiding posts
+* add page load check on post scanning
 
 ** Center the "Open Form" button between "Content" div and right edge.
 ** Align "Newest" and "Oldest" labels to center.
@@ -30,3 +30,4 @@
 ** Because of above, remove the "Cancel" button.
 ** Add "Hide Badges" functionality.
 ** scroll to progress bar when done scanning
+* fix duplicate posts on scan results
