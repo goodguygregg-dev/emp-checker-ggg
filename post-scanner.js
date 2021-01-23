@@ -24,8 +24,7 @@ function scanPosts() {
     let mostRecentComment = GM_getValue("mostRecentComment");
     let oldestComment = GM_getValue("oldestComment");
     let storedPostsHtml = GM_getValue("storedPostsHtml");
-    GM_setValue("previousPostId", mostRecentComment);
-
+    
     if (mostRecentComment === undefined || oldestComment === undefined) {
         console.log(
             "Both mostRecentComment and oldestComment should have been stored at this point... Something is wrong...Exiting function"
@@ -56,7 +55,6 @@ function scanPosts() {
         addButtonsToPosts();
         addSandbox();
         updateProgressBarValue();
-        //window.scrollTo(0, 0);  (deprecated by next line)
         document.getElementById('progress-bar').scrollIntoView();
         clearSavedValues();
         jQuery("#content .thin h2").html(generateCheckingPageHeader(mostRecentComment, oldestComment));
@@ -184,9 +182,15 @@ function iterateThroughPosts(mostRecentComment, oldestComment, storedPostsHtml) 
                 } else if (postId > mostRecentComment) {
                     return true;
                 } else {
-                    // storedPostsHtml = storedPostsHtml + "\n" + jQuery(this).prev()[0].outerHTML + "\n" + jQuery(this)[0].outerHTML;
-                       tempPostHtml = "\n" + jQuery(this)[0].outerHTML;
-                       postArray.push(tempPostHtml);
+                    if (postId < previousPostId || postId == mostRecentComment) {
+                        // storedPostsHtml = storedPostsHtml + "\n" + jQuery(this).prev()[0].outerHTML + "\n" + jQuery(this)[0].outerHTML;
+                        tempPostHtml = "\n" + jQuery(this)[0].outerHTML;
+                        postArray.push(tempPostHtml);
+                        previousPostId = postId;
+                        GM_setValue("previousPostId", postId);
+                    } else {
+                        console.log("Comment with ID " + postId + " was ignored because it's a dupe.");
+                    }
                 }
             });
     }

@@ -193,6 +193,7 @@ function registerButtonsCallbacks() {
             GM_setValue("isMainMenuOpen", true);
             GM_setValue("mostRecentComment", mostRecentComment);
             GM_setValue("oldestComment", oldestComment);
+            GM_setValue("previousPostId", mostRecentComment);
             GM_setValue("isScaning", true);
             scanPosts();
         }
