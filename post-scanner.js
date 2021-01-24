@@ -48,7 +48,9 @@ function scanPosts() {
         jQuery(".linkbox").remove();
         insertProgressBarHtml();
         jQuery(".thin").append(ans.storedHtml);
-        jQuery("a[href='#']").attr('href', '#progress-bar')
+        jQuery("a[href='#']").attr('href', '#progress-bar');
+        // hide default quote button
+        jQuery("[title='quote this post']").hide();
 
         // insertModalHtml();
         GM_setValue("isScaning", false);
@@ -69,6 +71,7 @@ function scanPosts() {
             iframe.setAttribute("src", "https://www.youtube-nocookie.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
             this.innerHTML = "";
             this.appendChild(iframe);
+        // hide default quote buttons
         });
     } else {
         setTimeout(function () {

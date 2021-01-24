@@ -1,7 +1,6 @@
 * trailing and leading spaces in post number fields
 * being able to submit report to the checking thread
 * postcount in the report header
-* hide normal quote button
 * opening the settings page and pressing the top right "x" to close followed by quoting a comment. returning to settings will show the quote modal.
 * preview button in the settings modal throws and error and gets stuck on "updating" forever
 * inserting bbcode into header/footer etc in the settings does not work 
@@ -14,7 +13,7 @@
 ** Align "Newest" and "Oldest" labels to center.
 ** CSS style for Afterdark
 ** Add a warning before leaving the page so progress won't be lost
-
+** Remove dash in post smallhead (separator between 'span time' and quote button)
 
 
 // done
@@ -30,3 +29,4 @@
 ** scroll to progress bar when done scanning
 * fix duplicate posts on scan results
 * fls report quote links broken
+* hide normal quote button
