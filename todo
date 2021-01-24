@@ -1,7 +1,6 @@
 * trailing and leading spaces in post number fields
 * being able to submit report to the checking thread
 * postcount in the report header
-* fls report quote links broken
 * hide normal quote button
 * opening the settings page and pressing the top right "x" to close followed by quoting a comment. returning to settings will show the quote modal.
 * preview button in the settings modal throws and error and gets stuck on "updating" forever
@@ -14,7 +13,6 @@
 ** Center the "Open Form" button between "Content" div and right edge.
 ** Align "Newest" and "Oldest" labels to center.
 ** CSS style for Afterdark
-** Resize gifs too
 ** Add a warning before leaving the page so progress won't be lost
 
 
@@ -31,3 +29,4 @@
 ** Add "Hide Badges" functionality.
 ** scroll to progress bar when done scanning
 * fix duplicate posts on scan results
+* fls report quote links broken

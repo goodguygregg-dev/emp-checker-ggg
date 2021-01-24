@@ -59,7 +59,7 @@ function scanPosts() {
         clearSavedValues();
         jQuery("#content .thin h2").html(generateCheckingPageHeader(mostRecentComment, oldestComment));
         jQuery("#quickpost").val(generateReportHeader(mostRecentComment, oldestComment));
-        //resize images
+        // resize images
         jQuery("body").find(".post_content img.scale_image").attr("width","500");
         // to make youtube embeds work
         jQuery("div.youtube").on("click", function() {

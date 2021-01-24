@@ -101,42 +101,73 @@ function registerQuoteModalButtonsCallbacks() {
 
     jQuery("body").on("click", ".quote-comment-modal #Ok-button", function () {
         let postIdJquery = "";
-        if((document.URL.indexOf(collage_checker_string) >= 0) || (document.URL.indexOf(forum_checker_string) >= 0) || (document.URL.indexOf(torrent_checker_string) >= 0)){
-                postIdJquery = jQuery(".modal-content").find(".post_id");
-                console.log(postIdJquery.html());
-                let postId = postIdJquery.html().replace("#","");
-                console.log(postId)
-                let threadId = postIdJquery.attr("href").match(/.*?id=(\d+)/)[1];
-                let postLink = postIdJquery.attr("href");
-                let username = jQuery(".modal-content").find(".user_name a").html();
-                let checkerComment = jQuery(".modal-content #comment-text-area").val();
-                generateQuotedText(postId, "t" + threadId, username, postLink, checkerComment);
-                jQuery(".modal-content #comment-text-area").val("");
-                hidePost("post" + postId);
-                jQuery(".quote-comment-modal").hide();
-                unregisterModalButtonsCallbacks();
-                updateProgressBarValue();
-            } else {
-                postIdJquery = jQuery(".modal-content").find("div[id^=post]");
-                let postId = postIdJquery.attr("id").replace("post", "");
-                console.log("---- debug start: " + "postIdJquerry: \n" + postIdJquery.html());
-                console.log("---- debug end");
-                let threadId = postIdJquery.find(".post_id").attr("href").match(/.*?id=(\d+)/)[1];
-                let postLink = postIdJquery.find(".forum_post .post_id").attr("href");
-                let username = jQuery(".modal-content").find(".user_name a").html();
-                let checkerComment = jQuery(".modal-content #comment-text-area").val();
-                generateQuotedText(postId, "t" + threadId, username, postLink, checkerComment);
-                jQuery(".modal-content #comment-text-area").val("");
-                hidePost("post" + postId);
-                jQuery(".quote-comment-modal").hide();
-                unregisterModalButtonsCallbacks();
-                updateProgressBarValue();
+        
+        // collage comments (site bug)
+        if(document.URL.indexOf(collage_checker_string) >= 0) {
+            console.log("I see you're checking collage comments!");
+            postIdJquery = jQuery(".modal-content").find(".post_id");
+            let postId = postIdJquery.html().replace("#","");
+            let threadId = postIdJquery.attr("href").match(/[0-9]\d+.*?/); // fixed
+            let postLink = postIdJquery.attr("href");
+            let username = jQuery(".modal-content").find(".user_name a").html();
+            let checkerComment = jQuery(".modal-content #comment-text-area").val();
+            generateQuotedText(postId, "c" + threadId, username, postLink, checkerComment);
+            jQuery(".modal-content #comment-text-area").val("");
+            hidePost("post" + postId);
+            jQuery(".quote-comment-modal").hide();
+            unregisterModalButtonsCallbacks();
+            updateProgressBarValue();
+        
+        // forum posts
+        } else if(document.URL.indexOf(forum_checker_string) >= 0) {
+            console.log("I see you're checking forum posts!");
+            postIdJquery = jQuery(".modal-content").find(".post_id");
+            let postId = postIdJquery.html().replace("#","");
+            let threadId = postIdJquery.attr("href").match(/[0-9]\d+.*?/);
+            let postLink = postIdJquery.attr("href");
+            let username = jQuery(".modal-content").find(".user_name a").html();
+            let checkerComment = jQuery(".modal-content #comment-text-area").val();
+            generateQuotedText(postId, "f" + threadId, username, postLink, checkerComment);
+            jQuery(".modal-content #comment-text-area").val("");
+            hidePost("post" + postId);
+            jQuery(".quote-comment-modal").hide();
+            unregisterModalButtonsCallbacks();
+            updateProgressBarValue();
 
-        //<a class="post_id" href="/requests.php?action=view&amp;id=117977&amp;postid=38480#post38480">#38480</a>
-
-            }
-
-
+        // torrent comments
+        } else if (document.URL.indexOf(torrent_checker_string) >= 0) { // overlib onmouseover and nd onmouseout is not defined error on console
+            console.log("I see you're checking torrent comments!");
+            postIdJquery = jQuery(".modal-content").find(".post_id");
+            let postId = postIdJquery.html().replace("#","");
+            let threadId = postIdJquery.attr("href").match(/[0-9]\d+.*?/);
+            let postLink = postIdJquery.attr("href");
+            let username = jQuery(".modal-content").find(".user_name a").html();
+            let checkerComment = jQuery(".modal-content #comment-text-area").val();
+            generateQuotedText(postId, "t" + threadId, username, postLink, checkerComment);
+            jQuery(".modal-content #comment-text-area").val("");
+            hidePost("post" + postId);
+            jQuery(".quote-comment-modal").hide();
+            unregisterModalButtonsCallbacks();
+            updateProgressBarValue();
+        
+        // request comments
+        } else { // overlib onmouseover and nd onmouseout is not defined error on console
+            console.log("I see you're checking request comments!");
+            postIdJquery = jQuery(".modal-content").find("div[id^=post]");
+            let postId = postIdJquery.attr("id").replace("post", "");
+            // console.log("---- debug start: " + "postIdJquerry: \n" + postIdJquery.html());
+            // console.log("---- debug end");
+            let threadId = postIdJquery.find(".post_id").attr("href").match(/.*?id=(\d+)/)[1];
+            let postLink = postIdJquery.find(".forum_post .post_id").attr("href");
+            let username = jQuery(".modal-content").find(".user_name a").html();
+            let checkerComment = jQuery(".modal-content #comment-text-area").val();
+            generateQuotedText(postId, "r" + threadId, username, postLink, checkerComment);
+            jQuery(".modal-content #comment-text-area").val("");
+            hidePost("post" + postId);
+            jQuery(".quote-comment-modal").hide();
+            unregisterModalButtonsCallbacks();
+            updateProgressBarValue();
+        }
     });
 }
 
@@ -160,6 +191,7 @@ async function generateQuotedText(postId, place, username, postLink, checkerComm
     let quotedTextFromServerDecoded = html_entity_decode(quotedTextFromServerEncoded);
     let params = place != "" ? `,${place},${postId}` : "";
     let quoteTagStart = `[quote=${username}${params}]`;
+    //let quoteTagStart = `[quote=${username},${postId}]`;  // editing this line
     let quoteTagEnd = "[/quote]";
 
     let quotedTextFinal = `${quoteTagStart}${quotedTextFromServerDecoded}${quoteTagEnd}`;
@@ -186,7 +218,7 @@ async function generateQuotedText(postId, place, username, postLink, checkerComm
 
 
 function Myinsert2(f, textID) {
-    
+
     var obj = document.getElementById(textID);
 
     if (document.selection) {
