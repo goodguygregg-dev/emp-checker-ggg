@@ -6,7 +6,6 @@
 * inserting bbcode into header/footer etc in the settings does not work 
 * add cancel checking button and update the report header to reflect this
 * don't upscale external images if they are too small (i think we downscale to 500px width?)
-* pause YT videos when hiding posts
 * add page load check on post scanning
 
 ** Center the "Open Form" button between "Content" div and right edge.
@@ -30,3 +29,4 @@
 * fix duplicate posts on scan results
 * fls report quote links broken
 * hide normal quote button
+* pause YT videos when hiding posts

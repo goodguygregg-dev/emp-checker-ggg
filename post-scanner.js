@@ -66,6 +66,7 @@ function scanPosts() {
         // to make youtube embeds work
         jQuery("div.youtube").on("click", function() {
             var iframe = document.createElement("iframe");
+            iframe.setAttribute("class", "youtube-iframe");
             iframe.setAttribute("frameborder", "0");
             iframe.setAttribute("allowfullscreen", "");
             iframe.setAttribute("src", "https://www.youtube-nocookie.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
