@@ -9,7 +9,6 @@ function registerPostButtonCallbacks() {
     jQuery("body").on("click", "#added-buttons #comment-ok", function () {
         if((document.URL.indexOf(collage_checker_string) >= 0) || (document.URL.indexOf(forum_checker_string) >= 0) || (document.URL.indexOf(torrent_checker_string) >= 0)){
             let postIdString = jQuery(this).closest("table[id^=post]").attr("id");
-            // add youtube stop function here
             jQuery('.youtube-iframe').each(function(index) {
                 jQuery(this).attr('src', jQuery(this).attr('src').replace("autoplay=1","autoplay=0"));
                 return false;
