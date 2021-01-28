@@ -10,8 +10,9 @@
 ** Center the "Open Form" button between "Content" div and right edge.
 ** Align "Newest" and "Oldest" labels to center.
 ** CSS style for Afterdark
-** Add a warning before leaving the page so progress won't be lost
 ** Remove dash in post smallhead (separator between 'span time' and quote button)
+
+*** pause YT videos when hiding posts (needs more testing)
 
 
 // done
@@ -28,5 +29,5 @@
 * fix duplicate posts on scan results
 * fls report quote links broken
 * hide normal quote button
-* pause YT videos when hiding posts
 * postcount in the report header
+** Add a warning before leaving the page so progress won't be lost

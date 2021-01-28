@@ -49,6 +49,7 @@ function scanPosts() {
         insertProgressBarHtml();
         jQuery(".thin").append(ans.storedHtml);
         jQuery("a[href='#']").attr('href', '#progress-bar');
+        
         // hide default quote button
         jQuery("[title='quote this post']").hide();
 
@@ -61,8 +62,10 @@ function scanPosts() {
         clearSavedValues();
         jQuery("#content .thin h2").html(generateCheckingPageHeader(mostRecentComment, oldestComment));
         jQuery("#quickpost").val(generateReportHeader(mostRecentComment, oldestComment));
+        
         // resize images
         jQuery("body").find(".post_content img.scale_image").attr("width","500");
+        
         // to make youtube embeds work
         jQuery("div.youtube").on("click", function() {
             var iframe = document.createElement("iframe");
@@ -72,6 +75,13 @@ function scanPosts() {
             iframe.setAttribute("src", "https://www.youtube-nocookie.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
             this.innerHTML = "";
             this.appendChild(iframe);
+
+        //ask for confirmation before leaving the page while a check is in progress
+        window.addEventListener("beforeunload", function(e) {
+            var confMessage = "5G spreads Covid";
+            (e || window.event).returnValue = confMessage;
+            return confMessage;
+            });
         });
     } else {
         setTimeout(function () {
