@@ -25,10 +25,10 @@ function setMainMenuOpen() {
     let isMainMenuOpen = GM_getValue("isMainMenuOpen");
     if (isMainMenuOpen) {
         jQuery("#main-menu-button").html("Open Menu");
-        jQuery(".main-menu-form-popup").hide();
+        jQuery(".main-menu-form-popup").slideUp(600);
     } else {
         jQuery("#main-menu-button").html("Close Menu");
-        jQuery(".main-menu-form-popup").show();
+        jQuery(".main-menu-form-popup").slideDown(600);
     };
 };
 
@@ -37,10 +37,10 @@ function setHideAvatarLabels() {
     let isHidingAvatars = GM_getValue("isHidingAvatars");
     if (isHidingAvatars) {
         jQuery(".main-menu-form-popup #hide-avatar-button").html("Show Avatars");
-        jQuery(".avatar").hide();
+        jQuery(".avatar").slideUp(400);
     } else {
         jQuery(".main-menu-form-popup #hide-avatar-button").html("Hide Avatars");
-        jQuery(".avatar").show();
+        jQuery(".avatar").slideDown(400);
     }
 }
 
@@ -50,10 +50,10 @@ function setHideBadgesLabels() {
     let isHidingBadges = GM_getValue("isHidingBadges");
     if (isHidingBadges) {
         jQuery(".main-menu-form-popup #hide-badges-button").html("Show Badges");
-        jQuery(".badges").hide();
+        jQuery(".badges").slideUp(400);
     } else {
         jQuery(".main-menu-form-popup #hide-badges-button").html("Hide Badges");
-        jQuery(".badges").show();
+        jQuery(".badges").slideDown(400);
     }
 }
 
@@ -88,7 +88,7 @@ function registerButtonsCallbacks() {
                 clearSavedValues();
             }
             jQuery("#most-recent-comment-input").val(newestCommentId);
-            jQuery(".main-menu-form-popup").show();
+            jQuery(".main-menu-form-popup").slideDown(600);
         });
     } else {
         console.log("main-menu.js");
@@ -104,14 +104,14 @@ function registerButtonsCallbacks() {
                 clearSavedValues();
             }
             jQuery("#most-recent-comment-input").val(newestCommentId);
-            jQuery(".main-menu-form-popup").show();
+            jQuery(".main-menu-form-popup").slideDown(600);
         });
     }
 
     // hides the main menu and clears saved data...
     jQuery("body").on("click", ".main-menu-form-popup #clear-data-button", function () {
         clearSavedValues();
-        jQuery(".main-menu-form-popup").hide();
+        jQuery(".main-menu-form-popup").slideUp(600);
         jQuery("#main-menu-button").html("Open Menu");
         GM_setValue("isMainMenuOpen", true);
     });
@@ -125,7 +125,7 @@ function registerButtonsCallbacks() {
     jQuery("body").on("click", ".main-menu-form-popup #settings-button", function () {
         insertSettingsModalHtml();
         jQuery(".quote-comment-modal").show();
-        jQuery(".main-menu-form-popup").hide();
+        jQuery(".main-menu-form-popup").slideDown(600);
         jQuery("#main-menu-button").html("Open Menu");
         GM_setValue("isMainMenuOpen", true);
     });
@@ -188,7 +188,7 @@ function registerButtonsCallbacks() {
         } else if (mostRecentComment <= oldestComment) {
             alert("Oldest comment must be a smaller number than the newest comment");
         } else {
-            jQuery(".main-menu-form-popup").hide();
+            jQuery(".main-menu-form-popup").slideUp(600);;
             jQuery("#main-menu-button").html("Open Menu");
             GM_setValue("isMainMenuOpen", true);
             GM_setValue("mostRecentComment", mostRecentComment);
