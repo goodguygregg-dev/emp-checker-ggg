@@ -12,9 +12,6 @@
 ** CSS style for Afterdark
 ** Remove dash in post smallhead (separator between 'span time' and quote button)
 
-*** pause YT videos when hiding posts (needs more testing)
-
-
 // done
 
 * koukol is a penisbutt
@@ -31,3 +28,4 @@
 * hide normal quote button
 * postcount in the report header
 ** Add a warning before leaving the page so progress won't be lost
+*** pause YT videos when hiding posts (hopefully this is finally fixed)

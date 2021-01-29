@@ -9,18 +9,14 @@ function registerPostButtonCallbacks() {
     jQuery("body").on("click", "#added-buttons #comment-ok", function () {
         if((document.URL.indexOf(collage_checker_string) >= 0) || (document.URL.indexOf(forum_checker_string) >= 0) || (document.URL.indexOf(torrent_checker_string) >= 0)){
             let postIdString = jQuery(this).closest("table[id^=post]").attr("id");
-            jQuery('.youtube-iframe').each(function(index) {
-                jQuery(this).attr('src', jQuery(this).attr('src').replace("autoplay=1","autoplay=0"));
-                return false;
-            });
+            let thisVid = jQuery(this).closest("table[id^=post]").find('.youtube-iframe');
+            if(thisVid.length){jQuery(thisVid).attr('src', jQuery(thisVid).attr('src').replace("autoplay=1","autoplay=0"))};
             console.log("torrent,forum,collage: " + postIdString);
             hidePost(postIdString);
         } else {
             let postIdString = jQuery(this).closest("div[id^=post]").attr("id");
-            jQuery('.youtube-iframe').each(function(index) {
-                jQuery(this).attr('src', jQuery(this).attr('src').replace("autoplay=1","autoplay=0"));
-                return false;
-            });
+            let thisVid = jQuery(this).closest("table[id^=post]").find('.youtube-iframe');
+            if(thisVid.length){jQuery(thisVid).attr('src', jQuery(thisVid).attr('src').replace("autoplay=1","autoplay=0"))};
             hidePost(postIdString);
         }
     });
@@ -35,9 +31,13 @@ function registerPostButtonCallbacks() {
         let cloned = undefined;
 
         if((document.URL.indexOf(collage_checker_string) >= 0) || (document.URL.indexOf(forum_checker_string) >= 0) || (document.URL.indexOf(torrent_checker_string) >= 0)){
+            let thisVid = jQuery(this).closest("table[id^=post]").find('.youtube-iframe');
+            if(thisVid.length){jQuery(thisVid).attr('src', jQuery(thisVid).attr('src').replace("autoplay=1","autoplay=0"))};
             commentHtml = jQuery(this).closest("table[id^=post]").outerHTML;
             cloned = jQuery(this).closest("table[id^=post]").clone();
         } else {
+            let thisVid = jQuery(this).closest("table[id^=post]").find('.youtube-iframe');
+            if(thisVid.length){jQuery(thisVid).attr('src', jQuery(thisVid).attr('src').replace("autoplay=1","autoplay=0"))};
             commentHtml = jQuery(this).closest("div[id^=post]").outerHTML;
             cloned = jQuery(this).closest("div[id^=post]").clone();
         }
