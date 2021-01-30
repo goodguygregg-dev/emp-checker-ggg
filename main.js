@@ -23,7 +23,7 @@ let user_settings = GM_SuperValue.get("user_settings");
 // GM_SuperValue.set("settings", settings);
 
 // console.log(settings);
-
+//not test
 var undoArray = [];
 
 // GM_deleteValue("isScaning");
