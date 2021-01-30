@@ -9,4 +9,13 @@
 * preview button in the settings modal throws and error and gets stuck on "updating" forever
 * inserting bbcode into header/footer etc in the settings does not work 
 * add cancel checking button and update the report header to reflect this
+<<<<<<< HEAD
 * pause embedded videos when elements are hidden (pressing ok or quote)
+=======
+<<<<<<< HEAD
+* button to scroll back to progressbar
+* hide badges setting
+=======
+* pause embedded videos when elements are hidden (pressing ok or quote)
+>>>>>>> main
+>>>>>>> dev
