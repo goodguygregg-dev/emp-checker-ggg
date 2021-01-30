@@ -50,7 +50,6 @@
 // @include      https://www.empornium.me/requests.php?*action=allcomments
 // @include      https://www.empornium.me/forum/recent*
 // @include      https://www.empornium.me/collages.php*
-/* @downloadURL  https://github.com/goodguygregg-dev/emp-checker-ggg/raw/dev/Main_UserScript.user.js */
 // @downloadURL  https://github.com/goodguygregg-dev/emp-checker-ggg/raw/main/Main_UserScript.user.js //
 // @grant        GM_setValue
 // @grant        GM_getValue
