@@ -75,14 +75,14 @@ function scanPosts() {
             iframe.setAttribute("src", "https://www.youtube-nocookie.com/embed/" + this.dataset.embed + "?rel=0&showinfo=0&autoplay=1");
             this.innerHTML = "";
             this.appendChild(iframe);
+        });
 
         //ask for confirmation before leaving the page while a check is in progress
-        window.addEventListener("beforeunload", function(e) {
+        window.addEventListener("beforeunload", function (e) {
             var confMessage = "5G spreads Covid";
             (e || window.event).returnValue = confMessage;
             return confMessage;
             });
-        });
     } else {
         setTimeout(function () {
             let next_page = jQuery(".pager_next");
