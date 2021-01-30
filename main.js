@@ -28,6 +28,7 @@ var undoArray = [];
 
 // GM_deleteValue("isScaning");
 
+// checks if is still scanning
 function scanCheck() {
     let isScaning = GM_getValue("isScaning");
     if (isScaning === undefined) {
