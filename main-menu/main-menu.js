@@ -42,7 +42,7 @@ function registerButtonsCallbacks() {
 
 
     
-    // shows the main menu
+    // shows the main menu.
     if((document.URL.indexOf(collage_checker_string) >= 0) || (document.URL.indexOf(forum_checker_string) >= 0) || (document.URL.indexOf(torrent_checker_string) >= 0)){
         jQuery("body").on("click", "#main-menu-button", function () {
             let newestCommentId = -1;
