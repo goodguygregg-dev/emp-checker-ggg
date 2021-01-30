@@ -16,17 +16,9 @@ let forum_checker_string = "https://www.empornium.me/forum/recent";
 
 let user_settings = GM_SuperValue.get("user_settings");
 
-// let settings = GM_SuperValue.get("settings");
-
-// GM_SuperValue.delete("settings");
-
-// GM_SuperValue.set("settings", settings);
-
-// console.log(settings);
 
 var undoArray = [];
 
-// GM_deleteValue("isScaning");
 
 // checks if is still scanning
 function scanCheck() {
