@@ -50,8 +50,11 @@ function scanPosts() {
         jQuery(".thin").append(ans.storedHtml);
         jQuery("a[href='#']").attr('href', '#progress-bar');
         
-        // hide default quote button
+        // hide default quote button and hyphen separator
         jQuery("[title='quote this post']").hide();
+        var i;
+        for (i = 0; i < jQuery("tr.smallhead td span span.time").length ; i++) {
+        jQuery("tr.smallhead td span span.time")[i].nextSibling.textContent = "" };
 
         // insertModalHtml();
         GM_setValue("isScaning", false);
