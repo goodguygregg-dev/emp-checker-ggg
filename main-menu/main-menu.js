@@ -25,10 +25,10 @@ function setMainMenuOpen() {
     let isMainMenuOpen = GM_getValue("isMainMenuOpen");
     if (isMainMenuOpen) {
         jQuery("#main-menu-button").html("Open Menu");
-        jQuery(".main-menu-form-popup").slideUp(600);
+        jQuery(".main-menu-form-popup").slideUp(450);
     } else {
         jQuery("#main-menu-button").html("Close Menu");
-        jQuery(".main-menu-form-popup").slideDown(600);
+        jQuery(".main-menu-form-popup").slideDown(450);
     };
 };
 
@@ -88,7 +88,7 @@ function registerButtonsCallbacks() {
                 clearSavedValues();
             }
             jQuery("#most-recent-comment-input").val(newestCommentId);
-            jQuery(".main-menu-form-popup").slideDown(600);
+            jQuery(".main-menu-form-popup").slideDown(450);
         });
     } else {
         console.log("main-menu.js");
@@ -104,14 +104,14 @@ function registerButtonsCallbacks() {
                 clearSavedValues();
             }
             jQuery("#most-recent-comment-input").val(newestCommentId);
-            jQuery(".main-menu-form-popup").slideDown(600);
+            jQuery(".main-menu-form-popup").slideDown(450);
         });
     }
 
     // hides the main menu and clears saved data...
     jQuery("body").on("click", ".main-menu-form-popup #clear-data-button", function () {
         clearSavedValues();
-        jQuery(".main-menu-form-popup").slideUp(600);
+        jQuery(".main-menu-form-popup").slideUp(450);
         jQuery("#main-menu-button").html("Open Menu");
         GM_setValue("isMainMenuOpen", true);
     });
@@ -125,7 +125,7 @@ function registerButtonsCallbacks() {
     jQuery("body").on("click", ".main-menu-form-popup #settings-button", function () {
         insertSettingsModalHtml();
         jQuery(".quote-comment-modal").show();
-        jQuery(".main-menu-form-popup").slideDown(600);
+        jQuery(".main-menu-form-popup").slideDown(450);
         jQuery("#main-menu-button").html("Open Menu");
         GM_setValue("isMainMenuOpen", true);
     });
@@ -188,7 +188,7 @@ function registerButtonsCallbacks() {
         } else if (mostRecentComment <= oldestComment) {
             alert("Oldest comment must be a smaller number than the newest comment");
         } else {
-            jQuery(".main-menu-form-popup").slideUp(600);;
+            jQuery(".main-menu-form-popup").slideUp(450);;
             jQuery("#main-menu-button").html("Open Menu");
             GM_setValue("isMainMenuOpen", true);
             GM_setValue("mostRecentComment", mostRecentComment);

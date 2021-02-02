@@ -25,6 +25,11 @@ function registerPostButtonCallbacks() {
         undoHidePost();
     });
 
+    /*jQuery("body").on("click", "#added-buttons #view-comment", function () {
+        let url = jQuery(this).closest("td").find(".post_id").attr("href");
+        window.open("https://www.empornium.me" + url, "_blank");
+    });*/
+
     jQuery("body").on("click", "#added-buttons #quote-comment", function () {
         insertModalHtml();
         let commentHtml = undefined;
@@ -51,6 +56,8 @@ function registerPostButtonCallbacks() {
 
         jQuery(".quote-comment-modal").show();
         jQuery("#comment-text-area").focus();
+        document.getElementById('comment-text-area').scrollIntoView();
+        
 
         // jQuery(this).closest("div[id^=post]").hide();
         // updateProgressBarValue();

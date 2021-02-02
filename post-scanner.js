@@ -48,8 +48,13 @@ function scanPosts() {
         jQuery(".linkbox").remove();
         insertProgressBarHtml();
         jQuery(".thin").append(ans.storedHtml);
-        jQuery("a[href='#']").attr('href', '#progress-bar');
-        
+        // refurbishes "to top" button on each post to scroll to the progress bar
+        jQuery("a[href='#']").attr("href", "#progress-bar");
+        // makes all post id links and reports to open in a new tab/window
+        jQuery(".post_id").attr("target", "_blank");    
+        jQuery("a[title='report this post to staff']").attr("target", "_blank");
+        jQuery("a:contains('[Report]')").attr("target", "_blank"); // for requests
+
         // hide default quote button and hyphen separator
         jQuery("[title='quote this post']").hide();
         var i;
@@ -80,12 +85,28 @@ function scanPosts() {
             this.appendChild(iframe);
         });
 
-        //ask for confirmation before leaving the page while a check is in progress
+        // ask for confirmation before leaving the page while a check is in progress
         window.addEventListener("beforeunload", function (e) {
             var confMessage = "5G spreads Covid";
             (e || window.event).returnValue = confMessage;
             return confMessage;
             });
+
+        // insert "Finish report" button
+        let button = document.createElement("button");
+            button.className = "btn cancel";
+            button.type = "button";
+            button.id = "finish-report-button";
+            button.innerHTML = "Finish Report";
+            button.title = "Finishes the report at this point";
+        let mainMenu = document.getElementsByClassName("form-container")[0];
+        let referenceNode = document.getElementById("clear-data-button");
+        let insertedNode = mainMenu.insertBefore(button, referenceNode);
+        button.addEventListener ("click", function() {
+            finishReportPrematurely();
+        });
+
+
     } else {
         setTimeout(function () {
             let next_page = jQuery(".pager_next");
@@ -217,3 +238,21 @@ function iterateThroughPosts(mostRecentComment, oldestComment, storedPostsHtml) 
     console.log("is finished: " + finished);
     return { isFinished: finished, storedHtml: storedPostsHtml };
 }
+
+function finishReportPrematurely() {
+    alert("did something");  // placeholder to test if the button is working
+    
+    /*  NEEDS DISCUSSION
+    
+        check if the first remaining post's id (oldest) is smaller than the greatest id of checked/hidden posts (newest)
+        if false throw an error:
+       
+        "Your most recent checked post is "XXXXXX" and there are older posts still unchecked.
+        Please go back and make sure to check everything before this post number
+        and click the Finish Report button again"
+       
+        if true:
+        modify the post report header to replace the newest post id with the greatest id of hidden posts
+        hide all remaining posts */
+    
+};
