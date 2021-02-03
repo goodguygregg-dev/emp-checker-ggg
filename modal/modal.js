@@ -114,6 +114,10 @@ function registerQuoteModalButtonsCallbacks() {
             generateQuotedText(postId, "c" + threadId, username, postLink, checkerComment);
             jQuery(".modal-content #comment-text-area").val("");
             hidePost("post" + postId);
+            // if all posts are hidden, show the new undo button
+            if(jQuery('#content .thin').children('table:visible').length == 0) {
+                jQuery(document).find('#new-undo').show();
+            };
             jQuery(".quote-comment-modal").hide();
             unregisterModalButtonsCallbacks();
             updateProgressBarValue();
@@ -130,6 +134,10 @@ function registerQuoteModalButtonsCallbacks() {
             generateQuotedText(postId, "f" + threadId, username, postLink, checkerComment);
             jQuery(".modal-content #comment-text-area").val("");
             hidePost("post" + postId);
+            // if all posts are hidden, show the new undo button
+            if(jQuery('#content .thin').children('table:visible').length == 0) {
+                jQuery(document).find('#new-undo').show();
+            };
             jQuery(".quote-comment-modal").hide();
             unregisterModalButtonsCallbacks();
             updateProgressBarValue();
@@ -146,6 +154,10 @@ function registerQuoteModalButtonsCallbacks() {
             generateQuotedText(postId, "t" + threadId, username, postLink, checkerComment);
             jQuery(".modal-content #comment-text-area").val("");
             hidePost("post" + postId);
+            // if all posts are hidden, show the new undo button
+            if(jQuery('#content .thin').children('table:visible').length == 0) {
+                jQuery(document).find('#new-undo').show();
+            };
             jQuery(".quote-comment-modal").hide();
             unregisterModalButtonsCallbacks();
             updateProgressBarValue();
@@ -164,6 +176,10 @@ function registerQuoteModalButtonsCallbacks() {
             generateQuotedText(postId, "r" + threadId, username, postLink, checkerComment);
             jQuery(".modal-content #comment-text-area").val("");
             hidePost("post" + postId);
+            // if all posts are hidden, show the new undo button
+            if(jQuery('#content .thin').children('div:visible').not('.head').length == 0) {
+                jQuery(document).find('#new-undo').show();
+            };
             jQuery(".quote-comment-modal").hide();
             unregisterModalButtonsCallbacks();
             updateProgressBarValue();

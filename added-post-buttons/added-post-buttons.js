@@ -13,11 +13,19 @@ function registerPostButtonCallbacks() {
             if(thisVid.length){jQuery(thisVid).attr('src', jQuery(thisVid).attr('src').replace("autoplay=1","autoplay=0"))};
             console.log("torrent,forum,collage: " + postIdString);
             hidePost(postIdString);
+            // if all posts are hidden, show the new undo button
+            if(jQuery('#content .thin').children('table:visible').length == 0) {
+                jQuery(document).find('#new-undo').show();
+            };
         } else {
             let postIdString = jQuery(this).closest("div[id^=post]").attr("id");
             let thisVid = jQuery(this).closest("table[id^=post]").find('.youtube-iframe');
             if(thisVid.length){jQuery(thisVid).attr('src', jQuery(thisVid).attr('src').replace("autoplay=1","autoplay=0"))};
             hidePost(postIdString);
+            // if all posts are hidden, show the new undo button
+            if(jQuery('#content .thin').children('div:visible').not('.head').length == 0) {
+                jQuery(document).find('#new-undo').show();
+            };
         }
     });
 
@@ -26,6 +34,7 @@ function registerPostButtonCallbacks() {
     });
 
     jQuery(document).on("click", "#new-undo", function() {
+        jQuery(this).hide();
         undoHidePost();
     });
 

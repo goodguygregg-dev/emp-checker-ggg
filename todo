@@ -24,10 +24,10 @@
 * button to scroll back to progressbar
 * hide badges setting
 * hide recent threads
-** Use the "Open Menu" button to open and close the menu.
-** Change the "Open Menu" button label accordingly.
-** Because of above, remove the "Cancel" button.
-** Add "Hide Badges" functionality.
+** Use the "Open Menu" button to open and close the menu
+** Change the "Open Menu" button label accordingly
+** Because of above, remove the "Cancel" button
+** Add "Hide Badges" functionality
 ** scroll to progress bar when done scanning
 * fix duplicate posts on scan results
 * fls report quote links broken
@@ -35,7 +35,8 @@
 ** Add a warning before leaving the page so progress won't be lost
 ** pause YT videos when hiding posts
 ** Remove dash in post smallhead
-** Align "Newest" and "Oldest" labels to center.
+** Align "Newest" and "Oldest" labels to center
 ** Scroll to textbox automatically in quote modal
 *** Post links open in a new tab/window (NakedAngel)
 *** Add undo button to bring back the last post once they've all been hidden (rock lobster)
+*** Show the new undo button only if all posts are hidden, otherwise hide it
