@@ -12,8 +12,6 @@
 ** Add alert in Settings modal to confirm changes have been saved. Currently gives the impression the button does nothing
 ** Change menu buttons' titles according to their current status (show/hide)
 
-*** Add undo button to bring back the last post once they've all been hidden (rock lobster)
-
 
 // wip
 
@@ -40,3 +38,4 @@
 ** Align "Newest" and "Oldest" labels to center.
 ** Scroll to textbox automatically in quote modal
 *** Post links open in a new tab/window (NakedAngel)
+*** Add undo button to bring back the last post once they've all been hidden (rock lobster)
