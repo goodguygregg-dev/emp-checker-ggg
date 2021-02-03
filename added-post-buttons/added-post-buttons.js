@@ -25,6 +25,10 @@ function registerPostButtonCallbacks() {
         undoHidePost();
     });
 
+    jQuery(document).on("click", "#new-undo", function() {
+        undoHidePost();
+    });
+
     /*jQuery("body").on("click", "#added-buttons #view-comment", function () {
         let url = jQuery(this).closest("td").find(".post_id").attr("href");
         window.open("https://www.empornium.me" + url, "_blank");
