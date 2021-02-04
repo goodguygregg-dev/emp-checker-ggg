@@ -68,7 +68,8 @@ function scanPosts() {
         updateProgressBarValue();
         document.getElementById('progress-bar').scrollIntoView();
         clearSavedValues();
-        jQuery("#content .thin h2").html(generateCheckingPageHeader(mostRecentComment, oldestComment));
+        let pageHeader = jQuery("#content .thin h2")[0];
+        jQuery(pageHeader).html(generateCheckingPageHeader(mostRecentComment, oldestComment));
         jQuery("#quickpost").val(generateReportHeader(mostRecentComment, oldestComment));
         
         // resize images
@@ -92,20 +93,11 @@ function scanPosts() {
             return confMessage;
             });
 
-        // insert "Finish report" button
-        let button = document.createElement("button");
-            button.className = "btn cancel";
-            button.type = "button";
-            button.id = "finish-report-button";
-            button.innerHTML = "Finish Report";
-            button.title = "Finishes the report at this point";
-        let mainMenu = document.getElementsByClassName("form-container")[0];
-        let referenceNode = document.getElementById("clear-data-button");
-        let insertedNode = mainMenu.insertBefore(button, referenceNode);
-        button.addEventListener ("click", function() {
+        // show "Finish report" button
+        jQuery("#finish-report-button").show();
+        jQuery("#finish-report-button").on("click", function() {
             finishReportPrematurely();
         });
-
 
     } else {
         setTimeout(function () {

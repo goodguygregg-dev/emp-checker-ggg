@@ -40,3 +40,4 @@
 *** Post links open in a new tab/window (NakedAngel)
 *** Add undo button to bring back the last post once they've all been hidden (rock lobster)
 *** Show the new undo button only if all posts are hidden, otherwise hide it
+** Fixed report header duplication
