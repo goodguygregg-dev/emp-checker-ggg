@@ -4,8 +4,8 @@
 // @version      1.91
 // @description  Credits to curtwagner who wrote and maintained the original script.
 // @author       goodguygregg
-// @match        /^https://www\.empornium\.(me|sx|is)/torrents.php*/
-// @include      /^https://www\.empornium\.(me|sx|is)/torrents.php*/
+// @match        /^https://www\.empornium\.(me|sx|is)/torrents.php\?action=allcomments*
+// @include      /^https://www\.empornium\.(me|sx|is)/torrents.php\?action=allcomments*
 // @include      /^https://www\.empornium\.(me|sx|is)/requests.php*/
 // @include      /^https://www\.empornium\.(me|sx|is)/forum/recent*/
 // @include      /^https://www\.empornium\.(me|sx|is)/collages.php*/
